@@ -30,8 +30,25 @@ server.get("/", (request, response) => {
   response.send("LIVE!");
 });
 
+//Register new user route
+server.post("/create-user", async (request, response) => {
+  const { username, password } = request.body;
+  try {
+    //Hashing a password need bcrypt and salt rounds as an int
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({
+      username, 
+      password: hashedPassword,
+    });
+    await newUser.save();
+    response.send({ message: "User Created!" });
+  } catch(error){
+    response.status(500).send({ message: "User already exists, Please find another username" });
+  }
+});
+
 //Login existing user route
-server.post("/login", async (request, response) => {
+server.post("/", async (request, response) => {
   const { username, password } = request.body;
   try {
     const user = await User.findOne({ username });
