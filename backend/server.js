@@ -4,8 +4,12 @@ const port = 3000;
 const cors = require("cors");
 const mongoose = require("mongoose");
 const Product = require("./models/product");
+const User = require("./models/user");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 require("dotenv").config();
-const { DB_URI } = process.env;
+const { DB_URI, SECRET_KEY } = process.env;
 
 server.use(cors());
 server.use(express.json());
@@ -24,6 +28,29 @@ mongoose
 
 server.get("/", (request, response) => {
   response.send("LIVE!");
+});
+
+//Login existing user route
+server.post("/login", async (request, response) => {
+  const { username, password } = request.body;
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return response.status(404).send({ message: "Username does not exist" });
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      return response.status(403).send({ message: "Bad username or password" });
+    }
+
+    const jwtToken = jwt.sign({ id: user._id, username }, SECRET_KEY);
+    return response
+      .status(201)
+      .send({ message: "User Authenticated", token: jwtToken });
+  } catch (error) {
+    response.status(500).send({ message: error.message });
+  }
 });
 
 server.get("/products", async (request, response) => {
