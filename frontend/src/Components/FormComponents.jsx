@@ -1,14 +1,17 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function FormComponent({
   formData,
   handleOnSubmit,
   handleOnChange,
   currentPage,
+  nextPage,
   postResponse,
 }) {
-  return (
+    const navigate = useNavigate();
+    return (
     <div>
-      <h2>Groceries App</h2>
+      <h1>Groceries App</h1>
+      <h2>{currentPage}</h2>
       <form onSubmit={handleOnSubmit}>
         <label htmlFor="username">Username:</label>
         <input
@@ -28,12 +31,13 @@ export default function FormComponent({
           onChange={handleOnChange}
         />
         <br />
-        <button>Login</button>
+        <button>Submit</button>
       </form>
-      <p>
-        Not a member yet? Click <Link to="/create_user">here</Link> to join.
-      </p>
-      <p style={{ color: "red" }}>{postResponse}</p>
+      <p>{postResponse}</p>
+        <button onClick={() => navigate(`/${nextPage}`)}>
+            {nextPage === "" ? "Go to Login Page" : "Go to Register Page"}
+        </button>
     </div>
   );
+
 }

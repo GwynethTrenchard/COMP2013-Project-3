@@ -18,7 +18,7 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/login", {
+      const response = await axios.post("http://localhost:3000/", {
         ...formData,
       });
       setPostResponse(response.data.message);
@@ -45,8 +45,8 @@ export default function LoginPage() {
         postResponse={postResponse}
         handleOnChange={handleOnChange}
         handleOnSubmit={handleOnSubmit}
-        nextPage="main"
-        currentPage="login"
+        nextPage="create-user"
+        currentPage=""
       />
     </div>
   );
