@@ -1,5 +1,5 @@
 import QuantityCounter from "./QuantityCounter";
-
+//also changed this slightly to add the buttons needed for admin users only
 export default function ProductCard({
   productName,
   brand,
@@ -13,7 +13,17 @@ export default function ProductCard({
   handleEditProduct,
   _id,
   handleDeleteProduct,
+  isAdmin
 }) {
+  let editButton = null;
+  let deleteButton = null;
+
+  if(isAdmin) {
+    editButton = (<button id="edit-button" onClick={() => handleEditProduct({ price, brand, productName, image, _id })}>Edit</button>)
+  }
+  if(isAdmin) {
+    deleteButton = (<button className="RemoveButton" onClick={() => handleDeleteProduct(_id)}>Delete</button>)
+  }
   return (
     <div className="ProductCard">
       <h3>{productName}</h3>
@@ -28,17 +38,8 @@ export default function ProductCard({
       />
       <h3>{price}</h3>
       <button onClick={() => handleAddToCart(id)}>Add to Cart</button>
-      <button
-        id="edit-button"
-        onClick={() =>
-          handleEditProduct({ price, brand, productName, image, _id })
-        }
-      >
-        Edit
-      </button>
-      <button className="RemoveButton" onClick={() => handleDeleteProduct(_id)}>
-        Delete
-      </button>
+      {editButton}
+      {deleteButton}
     </div>
   );
 }
