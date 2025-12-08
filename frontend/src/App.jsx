@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import LoginPage from "./Components/LoginPage";
 import RegisterPage from "./Components/RegisterPage";
-
+import MainPage from "./Components/MainPage";
 
 import GroceriesAppContainer from "./Components/GroceriesAppContainer";
 
@@ -15,6 +15,7 @@ function App() {
           <Route path="/products" element={<GroceriesAppContainer />} />
           <Route path="/" element={<LoginPage />} />
           <Route path="/create-user" element={<RegisterPage />} />
+          <Route path="product" element={<MainPage />} />
         </Routes>
       </Router>
     </>
