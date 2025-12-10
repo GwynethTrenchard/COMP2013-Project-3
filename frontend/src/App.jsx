@@ -4,7 +4,7 @@ import "./App.css";
 import LoginPage from "./Components/LoginPage";
 import RegisterPage from "./Components/RegisterPage";
 import MainPage from "./Components/MainPage";
-
+import AddProduct from "./Components/Add-Product";
 import GroceriesAppContainer from "./Components/GroceriesAppContainer";
 
 function App() {
