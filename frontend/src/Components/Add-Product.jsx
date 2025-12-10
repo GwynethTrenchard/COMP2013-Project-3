@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ProductForm from "./ProductForm";
-import { link } from "react-router-dom"; // to link back to main REFERNCE: https://stackoverflow.com/questions/63979705/how-to-link-to-another-page-in-react
+import { Link } from "react-router-dom"; // to link back to main REFERNCE: https://stackoverflow.com/questions/63979705/how-to-link-to-another-page-in-react
 
 export default function AddProduct() {
   //States
@@ -35,7 +35,7 @@ export default function AddProduct() {
         handleOnUpdate(formData._id);
       } else {
         await axios
-          .post("http://localhost:3000/products", formData)
+          .post("http://localhost:3000/add-product", formData)
           .then((response) => {
             setPostResponse(response.data);
             console.log(response);
@@ -71,16 +71,15 @@ export default function AddProduct() {
     <div>
       <div className="AddProduct"></div>
       <ProductForm
-        productName={formData.productName}
-        brand={formData.brand}
-        price={formData.price}
-        image={formData.image}
+        formData={formData}
         handleOnSubmit={handleOnSubmit}
         handleOnChange={handleOnChange}
+        postResponse={postResponse}
+        isEditing={isEditing}
       />
       <p style={{ color: "green" }}>{postResponse?.message}</p>
-      <button onClick={handleSubmit}>Submit</button>
-      <Link to="./MainPage">Click here to go back to main</Link>
+      <button onClick={handleOnSubmit}>Submit</button>
+      <Link to="/product">Click here to go back to main</Link>
     </div>
   );
 }
