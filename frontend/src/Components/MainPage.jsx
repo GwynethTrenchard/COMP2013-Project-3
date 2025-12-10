@@ -11,7 +11,7 @@ export default function MainPage() {
     const [productQuantity, setProductQuantity] = useState([]); //the states used in MainPage
     const [cartList, setCartList] = useState([]);
     const [productData, setProductData] = useState([]);
-    const [currentUser, setCurrentUser] = useState(() => {
+    const [currentUser] = useState(() => {
     const jwtToken = Cookies.get("jwt-authorization");
     if (!jwtToken) return {username: "", isAdmin: false}; //return empty + false if its not the Token
     try {
@@ -28,28 +28,11 @@ export default function MainPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const jwtToken = Cookies.get("jwt-authorization");
-
-    if(!jwtToken){ //if its not the token return to login
-        navigate("/");
-        return;
-    }
-
-    try {
-        jwtDecode(jwtToken);
-    } catch (error) { //catches invalid JWT and returns to login
-        console.error("Invalid JWT", error);
-        navigate("/");
-    }
-  },[navigate]);
-
-  useEffect(() => {
     handleProductsDB();
     }, []);
 
   const handleLogout = () => { //handles the logout, setting the user to nothing and going back to login
     Cookies.remove("jwt-authorization");
-    setCurrentUser("");
     navigate("/");
   };
 
