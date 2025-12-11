@@ -6,6 +6,7 @@ import RegisterPage from "./Components/RegisterPage";
 import MainPage from "./Components/MainPage";
 import AddProduct from "./Components/Add-Product";
 import GroceriesAppContainer from "./Components/GroceriesAppContainer";
+import EditProductPage from "./Components/Edit-Product";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/create-user" element={<RegisterPage />} />
           <Route path="/product" element={<MainPage />} />
           <Route path="/add-product" element={<AddProduct />} />
+          <Route path="/edit-product" element={<EditProductPage />} />
         </Routes>
       </Router>
     </>
