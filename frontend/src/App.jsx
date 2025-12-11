@@ -8,6 +8,7 @@ import AddProduct from "./Components/Add-Product";
 import GroceriesAppContainer from "./Components/GroceriesAppContainer";
 import EditProductPage from "./Components/Edit-Product";
 import NotAuthorized from "./Components/NotAuthorized";
+import PageNotFound from "./Components/PageNotFound";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/add-product" element={<AddProduct />} />
           <Route path="/edit-product" element={<EditProductPage />} />
           <Route path="/not-authorized" element={<NotAuthorized />} />
+          <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </Router>
     </>
