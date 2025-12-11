@@ -7,6 +7,7 @@ import MainPage from "./Components/MainPage";
 import AddProduct from "./Components/Add-Product";
 import GroceriesAppContainer from "./Components/GroceriesAppContainer";
 import EditProductPage from "./Components/Edit-Product";
+import NotAuthorized from "./Components/NotAuthorized";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/product" element={<MainPage />} />
           <Route path="/add-product" element={<AddProduct />} />
           <Route path="/edit-product" element={<EditProductPage />} />
+          <Route path="/not-authorized" element={<NotAuthorized />} />
         </Routes>
       </Router>
     </>
