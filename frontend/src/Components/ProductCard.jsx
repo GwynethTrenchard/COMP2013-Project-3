@@ -14,18 +14,29 @@ export default function ProductCard({
   handleEditProduct,
   _id,
   handleDeleteProduct,
-  isAdmin
+  isAdmin,
 }) {
   const navigate = useNavigate();
 
   let editButton = null;
   let deleteButton = null;
 
-  if(isAdmin) {
-    editButton = (<button id="edit-button" onClick={() => navigate("/edit-product", {state: {_id}}) }>Edit</button>)
+  if (isAdmin) {
+    editButton = (
+      <button
+        id="edit-button"
+        onClick={() => navigate("/edit-product", { state: { _id } })}
+      >
+        Edit
+      </button>
+    );
   }
-  if(isAdmin) {
-    deleteButton = (<button className="RemoveButton" onClick={() => handleDeleteProduct(_id)}>Delete</button>)
+  if (isAdmin) {
+    deleteButton = (
+      <button className="RemoveButton" onClick={() => handleDeleteProduct(_id)}>
+        Delete
+      </button>
+    );
   }
   return (
     <div className="ProductCard">

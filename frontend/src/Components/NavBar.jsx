@@ -1,9 +1,17 @@
 //changed navbar slightly to include the new features
 import { Link } from "react-router-dom";
-export default function NavBar({ username, isAdmin, handleLogout, handleAddNewProduct, quantity }) {
+export default function NavBar({
+  username,
+  isAdmin,
+  handleLogout,
+  handleAddNewProduct,
+  quantity,
+}) {
   let addNewProductButton = null;
   if (isAdmin) {
-    addNewProductButton = (<button onClick={handleAddNewProduct}>Add New Product</button>);
+    addNewProductButton = (
+      <button onClick={handleAddNewProduct}>Add New Product</button>
+    );
   }
   return (
     <nav className="NavBar">

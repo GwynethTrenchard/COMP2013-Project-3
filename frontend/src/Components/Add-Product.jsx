@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ProductForm from "./ProductForm";
-import { Link } from "react-router-dom"; // to link back to main REFERNCE: https://stackoverflow.com/questions/63979705/how-to-link-to-another-page-in-react
 import { useNavigate } from "react-router-dom";
 
 export default function AddProduct() {
@@ -27,7 +26,7 @@ export default function AddProduct() {
       console.log(error.message);
     }
   };
-
+  const navigate = useNavigate();
   //Handle the submission of data
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -41,8 +40,8 @@ export default function AddProduct() {
           .then((response) => {
             setPostResponse(response.data);
             console.log(response);
-          })
-          .then(() => navigate("/product")); // to redictect to products
+            navigate("/product");
+          });
       }
     } catch (error) {
       console.log(error.message);
@@ -81,8 +80,6 @@ export default function AddProduct() {
         isEditing={isEditing}
       />
       <p style={{ color: "green" }}>{postResponse?.message}</p>
-      <button onClick={handleOnSubmit}>Submit</button>
-      <Link to="/product">Click here to go back to main</Link>
     </div>
   );
 }
