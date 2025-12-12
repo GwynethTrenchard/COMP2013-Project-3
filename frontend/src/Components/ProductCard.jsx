@@ -1,4 +1,5 @@
 import QuantityCounter from "./QuantityCounter";
+import { useNavigate } from "react-router-dom";
 //also changed this slightly to add the buttons needed for admin users only
 export default function ProductCard({
   productName,
@@ -15,11 +16,13 @@ export default function ProductCard({
   handleDeleteProduct,
   isAdmin
 }) {
+  const navigate = useNavigate();
+
   let editButton = null;
   let deleteButton = null;
 
   if(isAdmin) {
-    editButton = (<button id="edit-button" onClick={() => handleEditProduct({ price, brand, productName, image, _id })}>Edit</button>)
+    editButton = (<button id="edit-button" onClick={() => navigate("/edit-product", {state: {_id}}) }>Edit</button>)
   }
   if(isAdmin) {
     deleteButton = (<button className="RemoveButton" onClick={() => handleDeleteProduct(_id)}>Delete</button>)
