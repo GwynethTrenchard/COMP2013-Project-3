@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ProductForm from "./ProductForm";
 import { Link } from "react-router-dom"; // to link back to main REFERNCE: https://stackoverflow.com/questions/63979705/how-to-link-to-another-page-in-react
+import { useNavigate } from "react-router-dom";
 
 export default function AddProduct() {
   //States
@@ -33,13 +34,15 @@ export default function AddProduct() {
     try {
       if (isEditing) {
         handleOnUpdate(formData._id);
+        setIsEditing(false);
       } else {
         await axios
           .post("http://localhost:3000/add-product", formData)
           .then((response) => {
             setPostResponse(response.data);
             console.log(response);
-          });
+          })
+          .then(() => navigate("/product")); // to redictect to products
       }
     } catch (error) {
       console.log(error.message);
