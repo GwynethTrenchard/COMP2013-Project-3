@@ -6,11 +6,13 @@ import axios from "axios";
 import ProductCard from "./ProductCard"; //all the includes from other files i used
 import CartContainer from "./CartContainer";
 import NavBar from "./NavBar";
+import FilterPricesForm from "./FilterPricesForm";
 
 export default function MainPage() { 
     const [productQuantity, setProductQuantity] = useState([]); //the states used in MainPage
     const [cartList, setCartList] = useState([]);
     const [productData, setProductData] = useState([]);
+    const [fullProductData, setFullProductData] = useState([]);
     const [currentUser] = useState(() => {
     const jwtToken = Cookies.get("jwt-authorization");
     if (!jwtToken) return {username: "", isAdmin: false}; //return empty + false if its not the Token
@@ -40,13 +42,25 @@ export default function MainPage() {
   try {
     const response = await axios.get("http://localhost:3000/products");
     setProductData(response.data); //stores product object
+    setFullProductData(response.data);
     const initialQuantities = response.data.map((product) => ({id: product.id,quantity: 0,})); //creates an array for the initial quantities of products while setting it to 0
     setProductQuantity(initialQuantities); //sets the state with the initialized quantities
     } catch (error) {
     console.log(error.message);
     }
   };
+ const priceSanitizer = (price) => { //helper function to sanitize prices
+  return Number(price.replace("$", "").replace(",", ""));
+ };
 
+ const handleFilterPrices = (e) => { //handler funtion to filter prices of the product list
+  const maxPrice = e.target.value;
+  if (maxPrice !== "all") {
+    setProductData(fullProductData.filter((product) => priceSanitizer(product.price) < maxPrice));
+  } else {
+    setProductData(fullProductData)
+  };
+ }
 const handleAddQuantity = (productId, mode) => { //function for adding quantities
     if (mode === "cart") { 
       const newCartList = cartList.map((product) => {
@@ -134,7 +148,7 @@ const handleAddQuantity = (productId, mode) => { //function for adding quantitie
   };
 
   const handleEditProduct = () => { //handles sending the user to eit-product form
-    navigate("/edit-product");
+    navigate("/product/edit-product");
   }
 
 return( //return statement for sending all the values to the different files to get the correct display
@@ -147,6 +161,7 @@ return( //return statement for sending all the values to the different files to 
       quantity={cartList.length}
     />
   <div className="GroceriesApp-Container">
+    <FilterPricesForm handleFilterPrices={handleFilterPrices} />
     <div className="ProductsContainer">
       {productData.map((product) => (
         <ProductCard

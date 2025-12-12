@@ -16,7 +16,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/products" element={<GroceriesAppContainer />} />
-          <Route path="/main-page" element={<LoginPage />} />
+          <Route path="/" element={<LoginPage />} />
           <Route path="/create-user" element={<RegisterPage />} />
           <Route path="/product" element={<MainPage />} />
           <Route path="/add-product" element={<AddProduct />} />
