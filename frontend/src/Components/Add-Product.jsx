@@ -4,9 +4,9 @@ import ProductForm from "./ProductForm";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function AddProduct() {
-  //States
+  //all states used
   const location = useLocation();
-  const isAdmin = location.state;
+  const isAdmin = location.state; //this is here to get isAdmin's state from mainPage
   const [prroductsData, setProductsData] = useState([]);
   const [formData, setFormData] = useState({
     productName: "",

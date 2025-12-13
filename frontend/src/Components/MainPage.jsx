@@ -29,7 +29,7 @@ export default function MainPage() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
+  useEffect(() => { //calls the handle products db
     handleProductsDB();
     }, []);
 
@@ -144,7 +144,7 @@ const handleAddQuantity = (productId, mode) => { //function for adding quantitie
   };
 
   const handleAddNewProduct = () => { //handles sending the user to add-product form
-  navigate("/add-product", { state: currentUser.isAdmin });
+  navigate("/add-product", { state: currentUser.isAdmin }); //grabs the state of currentUser.isAdmin and sends that information over to add-product
   };
 
   const handleEditProduct = () => { //handles sending the user to eit-product form

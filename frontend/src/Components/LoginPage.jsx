@@ -5,17 +5,19 @@ import FormComponent from "./FormComponents";
 import Cookies from "js-cookie";
 
 export default function LoginPage() {
+  // states/variables
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [postResponse, setPostResponse] = useState("");
 
   const navigate = useNavigate();
 
+  // handler for change
   const handleOnChange = (e) => {
     setFormData((prevData) => {
       return { ...prevData, [e.target.name]: e.target.value };
     });
   };
-
+  //handles the login process
   const handleLogin = async () => {
     try {
       const response = await axios.post("http://localhost:3000/", {
@@ -31,13 +33,14 @@ export default function LoginPage() {
       setPostResponse(error.response.data.message || "Login failed!");
     }
   };
-
+  //handles submitting the login
   const handleOnSubmit = (e) => {
     e.preventDefault();
     handleLogin();
     setFormData({ username: "", password: "" });
   };
 
+  //returns for display
   return (
     <div>
       <FormComponent

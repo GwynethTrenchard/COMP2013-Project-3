@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 export default function EditProductPage() {
+  //variables and states
   const location = useLocation();
   const { _id } = location.state
 
@@ -19,7 +20,7 @@ export default function EditProductPage() {
   const [productsData, setProductsData] = useState([]);
   const [productQuantity, setProductQuantity] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => { //useEffect for handleProductDB
       handleProductDB();
   }, [_id]);
 
@@ -42,8 +43,8 @@ const handleProductDB = async () => {
   }
 };
 
-
-  const handleOnChange = (e) => {
+// handles whenver a change is made
+  const handleOnChange = (e) => { 
     setFormData((prevData) => {
       return { ...prevData, [e.target.name]: e.target.value };
     });

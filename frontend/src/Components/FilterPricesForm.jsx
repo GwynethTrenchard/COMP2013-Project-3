@@ -1,4 +1,4 @@
-export default function FilterPricesForm({ handleFilterPrices }) { //filterPricesForm from Extra Module 1 - Filtering, just changed slightly
+export default function FilterPricesForm({ handleFilterPrices }) { //filterPricesForm from Extra Module 1 - Filtering, just changed values to match what makes more sense for product prices
   return (
     <div>
       <h2>Filter Price</h2>

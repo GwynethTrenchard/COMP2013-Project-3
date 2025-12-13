@@ -4,18 +4,18 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function RegisterPage() {
-  // states
+  // states used
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [postResponse, setPostResponse] = useState("");
   const navigate = useNavigate();
 
-  //handlers
+  //handler for change
   const handleOnChange = (e) => {
     setFormData((prevData) => {
       return { ...prevData, [e.target.name]: e.target.value };
     });
   };
-
+ //handler for registering the user into the db
   const handleRegister = async () => {
     try {
       const response = await axios.post("http://localhost:3000/create-user", {
@@ -30,13 +30,14 @@ export default function RegisterPage() {
       setPostResponse(error.response.data.message || "Cannot create user");
     }
   };
-
+  //handler for submitting
   const handleOnSubmit = (e) => {
     e.preventDefault();
     handleRegister();
     setFormData({ username: "", password: "" });
   };
 
+  //return for display
   return (
     <div>
       <FormComponent
