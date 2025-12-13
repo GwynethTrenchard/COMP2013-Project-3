@@ -144,7 +144,7 @@ const handleAddQuantity = (productId, mode) => { //function for adding quantitie
   };
 
   const handleAddNewProduct = () => { //handles sending the user to add-product form
-  navigate("/add-product");
+  navigate("/add-product", { state: currentUser.isAdmin });
   };
 
   const handleEditProduct = () => { //handles sending the user to eit-product form

@@ -78,7 +78,7 @@ const handleOnUpdate = async (id) => {
         handleOnSubmit={handleOnSubmit}
         postResponse={postResponse}
       />
-      <a href="/products">Click here to go back to the main page</a>
+      <a href="/product">Click here to go back to the main page</a>
     </div>
   );
 }

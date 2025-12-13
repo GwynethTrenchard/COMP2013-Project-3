@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ProductForm from "./ProductForm";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function AddProduct() {
   //States
+  const location = useLocation();
+  const isAdmin = location.state;
   const [prroductsData, setProductsData] = useState([]);
   const [formData, setFormData] = useState({
     productName: "",
@@ -27,6 +29,12 @@ export default function AddProduct() {
     }
   };
   const navigate = useNavigate();
+    useEffect(() => {
+    // if the cuurent usr is not an admin, redirect
+    if (!isAdmin) {
+      navigate("/not-authorized");
+    }
+  }, []); //the warning is fine on the [] ignore it
   //Handle the submission of data
   const handleOnSubmit = async (e) => {
     e.preventDefault();
